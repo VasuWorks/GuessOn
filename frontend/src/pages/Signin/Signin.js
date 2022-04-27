@@ -2,6 +2,7 @@ import './Signin.css';
 import React from "react";
 import { Link } from 'react-router-dom'
 import logo from '../../logo-no-bottom.png';
+import { useHistory } from "react-router-dom";
 
 class Signin extends React.Component {
     constructor(props) {
@@ -20,8 +21,25 @@ class Signin extends React.Component {
         });
     }
 
-    handleSubmit(event) {
+    handleSubmit = async (event) => {
         event.preventDefault();
+        console.log(this.state.username);
+        console.log(this.state.password)
+        try {
+            const res = await axios({
+                method: 'post',
+                url: 'http://localhost:3001/user/authentication/signin',
+                data: {
+                    username: this.state.username,
+                    password: this.state.password,
+                },
+            });
+            if(res.data.status === 201) {
+
+            }
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     render() {

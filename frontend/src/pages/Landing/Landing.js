@@ -8,7 +8,7 @@ function Landing() {
       <div className="logo">
         <img src={logo} />
       </div>
-      <Link to={'/signup'} className="play">Click here to play!</Link>
+      <Link to={'/signup'} className="continue-title">Click here to play!</Link>
     </div>
   );
 }

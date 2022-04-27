@@ -2,13 +2,16 @@ import './Signup.css';
 import React from "react";
 import { Link } from 'react-router-dom';
 import logo from '../../logo-no-bottom.png';
+import axios from 'axios';
+import { useHistory } from "react-router-dom";
 
 class Signup extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            apiResponse: {}
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,8 +23,25 @@ class Signup extends React.Component {
         });
     }
 
-    handleSubmit(event) {
+    handleSubmit = async (event) => {
         event.preventDefault();
+        console.log(this.state.username);
+        console.log(this.state.password)
+        try {
+            const res = await axios({
+                method: 'post',
+                url: 'http://localhost:3001/user/authentication/signup',
+                data: {
+                    username: this.state.username,
+                    password: this.state.password,
+                },
+            });
+            if(res.data.status === 201) {
+
+            }
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     render() {
